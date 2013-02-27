@@ -58,7 +58,10 @@ class TreeHandler(object):
         return child
 
     def remove_child(self, parent, child):
-        parent.remove(child)
+        try:
+            parent.remove(child)
+        except ValueError:
+            pass # XXX: is it ok?
         child.parent = None
         return child
 
