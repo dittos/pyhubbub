@@ -210,8 +210,9 @@ init_hubbub(void)
 
 static inline PyObject *hubbub_string_to_unicode(const hubbub_string *data)
 {
-    /* ok to cast? */
-    return PyUnicode_FromStringAndSize((const char *)data->ptr, data->len);
+    /* XXX: ok to cast from unsigned char -> char? */
+    /* replace on error (see: http://www.w3.org/TR/html5/infrastructure.html#utf-8) */
+    return PyUnicode_DecodeUTF8((const char *)data->ptr, data->len, "replace");
 }
 static hubbub_error create_comment(void *ctx, const hubbub_string *data, 
 		void **result)
