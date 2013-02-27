@@ -4,6 +4,24 @@ PyHubbub
 PyHubbub is a HTML5 parser for Python, based on [Hubbub](http://www.netsurf-browser.org/projects/hubbub/).
 
 
+Installation
+------------
+
+Currently system-wide installation of libhubbub and its dependencies (libparserutils, buildsystem) is required.
+
+```bash
+git clone git://git.netsurf-browser.org/buildsystem.git
+git clone git://git.netsurf-browser.org/libparserutils.git
+git clone git://git.netsurf-browser.org/libhubbub.git
+[sudo] make -C buildsystem install
+[sudo] make -C libparserutils install
+[sudo] make -C libhubbub install
+git clone git://github.com/dittos/pyhubbub.git
+cd pyhubbub
+python setup.py install
+```
+
+
 Usage
 -----
 
