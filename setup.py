@@ -11,4 +11,5 @@ module = Extension('_hubbub',
 setup(name='pyhubbub',
       version='1.0',
       description='Python binding of Hubbub HTML5 parser',
+      py_modules=['pyhubbub'],
       ext_modules=[module])
