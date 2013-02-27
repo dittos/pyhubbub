@@ -250,12 +250,13 @@ static hubbub_error create_doctype(void *ctx, const hubbub_doctype *doctype,
 static hubbub_error create_element(void *ctx, const hubbub_tag *tag, 
 		void **result)
 {
+    uint32_t i;
     PyObject *name = hubbub_string_to_unicode(&tag->name);
     PyObject *elem = PyObject_CallMethod(ctx, "create_element", "iO", tag->ns, name);
     if (elem == NULL)
         return HUBBUB_INVALID;
 
-    for (uint32_t i = 0; i < tag->n_attributes; i++) {
+    for (i = 0; i < tag->n_attributes; i++) {
         const hubbub_attribute *a = &tag->attributes[i];
         PyObject *attr_name = hubbub_string_to_unicode(&a->name);
         PyObject *attr_value = hubbub_string_to_unicode(&a->value);
@@ -349,7 +350,8 @@ static hubbub_error form_associate(void *ctx, void *form, void *node)
 static hubbub_error add_attributes(void *ctx, void *node,
 		const hubbub_attribute *attributes, uint32_t n_attributes)
 {
-    for (uint32_t i = 0; i < n_attributes; i++) {
+    uint32_t i;
+    for (i = 0; i < n_attributes; i++) {
         const hubbub_attribute *a = &attributes[i];
         PyObject *attr_name = hubbub_string_to_unicode(&a->name);
         PyObject *attr_value = hubbub_string_to_unicode(&a->value);
