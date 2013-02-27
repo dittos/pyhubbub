@@ -1,12 +1,17 @@
 from distutils.core import setup, Extension
 import os
+import sys
 
 prefix = '/opt/netsurf'
+libs = ['hubbub', 'parserutils']
+if sys.platform != 'linux2':
+    # glibc already includes iconv function
+    libs.append('iconv')
 module = Extension('_hubbub',
                    sources=['hubbubmodule.c'],
                    include_dirs=[prefix + '/include'],
                    library_dirs=[prefix + '/lib'],
-                   libraries=['hubbub', 'parserutils', 'iconv'])
+                   libraries=libs)
 
 setup(name='pyhubbub',
       version='1.0',
