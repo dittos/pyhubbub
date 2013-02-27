@@ -114,9 +114,19 @@ class TreeHandler(object):
         #print encname
         pass
 
-def parse(data, encoding=None):
+def parse(source, encoding=None):
+    if hasattr(source, 'read'):
+        # TODO: incremental parsing
+        source = source.read()
+
+    if isinstance(source, unicode):
+        source = source.encode('utf-8')
+        assert encoding is None, 'Cannot explicitly set an encoding with a unicode string'
+        encoding = 'utf-8'
+
+    fix_enc = encoding is None # Fix encoding when using detection
     tree = TreeHandler()
-    parser = _hubbub.create_parser(encoding, False, tree)
-    parser.parse_chunk(data)
+    parser = _hubbub.create_parser(encoding, fix_enc, tree)
+    parser.parse_chunk(source)
     parser.completed()
     return tree.document_node
