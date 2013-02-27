@@ -12,7 +12,7 @@ class TreeHandler(object):
 
     def create_doctype(self, name, public_id, system_id, force_quirks):
         el = ET.Element('<!DOCTYPE>')
-        el.text = doctype
+        el.text = name
         return el
         
     def create_element(self, ns, tag):
